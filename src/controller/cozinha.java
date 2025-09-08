@@ -18,30 +18,30 @@ public class cozinha extends Thread {
 
 	private void verificaPrato() {
 		if ((idPrato % 2) == 0) {// lasanhaBolonhesa
-			prato(0.6, 0.6);
+			prato(0.6, 0.6); // manda os parametros pra fazer um random de 0.6 ate 1.2 faz um random de *0.6 ( numeros entre o.6 a 1.6) e soma 0.6 pra iniciar do 0,6
 			entregar();
 
 		} else {// sopaCebola
-			prato(0.3, 0.5);
+			prato(0.3, 0.5); //manda os parametros pra fazer um random de 0.5 ate 0.8 faz um random de *0.3 ( numeros entre o.5 a 0.8) e soma 0.6 ´pra iniciar do 0,5 
 			entregar();
 		}
 	}
 
 	private void prato(double a, double b) {
-		double tempo = ((Math.random() * a) + b);
-		long tempoMili = (long) (tempo * 1000);
-		try {
+		double tempo = ((Math.random() * a) + b); // a = distancia do max e min do periodo de cozimento/ b = somar para iniciar do min de coximento 
+		long tempoMili = (long) (tempo * 1000);   // transforma double pra long/ tem que or o tempo * 1000 tendtro de () pq se não trnasfora so o tempo e perde as  
+		try {                                     // casas depos da virgula
 			long tempoPercorrido = 0;
-			while (tempoPercorrido < tempoMili) {
-				sleep(100);
-				tempoPercorrido += 100;
-				int tempocozimento = (int) ((tempoPercorrido * 100) / tempoMili);
-				if (tempocozimento > 100) {
-					tempocozimento = 100;
-				}
-				System.out.println("Prato-" + idPrato + " preparando..." + tempocozimento + "%");
+			while (tempoPercorrido < tempoMili) {                                 // enqianto tempo parcorrida menor que tempo total
+				sleep(100);                                                       // espera 0.1seg pra atualizar a %  
+				tempoPercorrido += 100;                                           // add 0.1seg no contador // o contador é o tempoPercorrido
+				int tempocozimento = (int) ((tempoPercorrido * 100) / tempoMili); // calculo pra porcentagem // tem im (int) po o tenpope.. e o tempoMili é long
+				if (tempocozimento > 100) {                                       //(informação sleep so usa long por isso fiz a conta em long e depois passei pra int
+					tempocozimento = 100;  // if basico pra não mostrar a % 
+				}                          // maior que 100 fica paia
+				System.out.println("Prato-" + idPrato + " preparando..." + tempocozimento + "%"); // linha que mostra a msg no console com a % subindo a cada linha
 			}
-			System.out.println("Prato-" + idPrato + " Pronto");
+			System.out.println("Prato-" + idPrato + " Pronto"); // linha que mostra prato pronto no console
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
